@@ -1,14 +1,12 @@
 import requests
 import json
 
-doviz = requests.get('https://finans.truncgil.com/today.json').text.replace(
-    '\u0131', 'i').replace('\u015f', 's').replace('\u011f', 'g').replace('\u00fc', 'ü')
+doviz = requests.get('https://finans.truncgil.com/today.json', headers={"User-Agent":"Mozilla/5.0"}).content.decode("utf-8")
 doviz = json.loads(doviz)
 
 
-def save():
-    with open("data.json", "w") as f:
-        json.dump(doviz, f)
+with open("data.json", "w") as f:
+    json.dump(doviz, f, ensure_ascii=False)
 
 
 def get():
@@ -16,47 +14,50 @@ def get():
         kurlar = json.load(f)
         return kurlar
 
+data = get()
+
 
 usd = {
-    'alis': get()['USD']['Alis'],
-    'satis': get()['USD']['Satis'],
-    'degisim': get()['USD']['Degisim']
+    'Alış': get()['USD']['Alış'],
+    'Satış': get()['USD']['Satış'],
+    'Değişim': get()['USD']['Değişim']
 }
 
 eur = {
-    'alis': get()['EUR']['Alis'],
-    'satis': get()['EUR']['Satis'],
-    'degisim': get()['EUR']['Degisim']
+    'Alış': get()['EUR']['Alış'],
+    'Satış': get()['EUR']['Satış'],
+    'Değişim': get()['EUR']['Değişim']
 }
 
 gram = {
-    'alis': get()['gram-altin']['Alis'],
-    'satis': get()['gram-altin']['Satis'],
-    'degisim': get()['gram-altin']['Degisim']
+    'Alış': get()['gram-altin']['Alış'],
+    'Satış': get()['gram-altin']['Satış'],
+    'Değişim': get()['gram-altin']['Değişim']
 }
 
 ceyrek = {
-    'alis': get()['ceyrek-altin']['Alis'],
-    'satis': get()['ceyrek-altin']['Satis'],
-    'degisim': get()['ceyrek-altin']['Degisim']
+    'Alış': get()['ceyrek-altin']['Alış'],
+    'Satış': get()['ceyrek-altin']['Satış'],
+    'Değişim': get()['ceyrek-altin']['Değişim']
 }
 
 
 def show():
-    try:  
+    try:
+        print()
         print("Döviz (TRY)".center(50, '*'))
         print(get()['Update_Date'].center(50, ' '))
         print(
-            f'''Dolar\n--------------\nAlış: {str(usd['alis'])} TL\nSatış: {str(usd['satis'])} TL\nDeğişim: {str(usd['degisim'])}\n\n'''
+            f'''Dolar\n--------------\nAlış: {str(usd['Alış'])} TL\nSatış: {str(usd['Satış'])} TL\nDeğişim: {str(usd['Değişim'])}\n\n'''
         )
         print(
-            f'''Euro\n--------------\nAlış: {str(eur['alis'])} TL\nSatış: {str(eur['satis'])} TL\nDeğişim: {str(eur['degisim'])}\n\n'''
+            f'''Euro\n--------------\nAlış: {str(eur['Alış'])} TL\nSatış: {str(eur['Satış'])} TL\nDeğişim: {str(eur['Değişim'])}\n\n'''
         )
         print(
-            f'''Çeyrek Altın\n--------------\nAlış: {str(ceyrek['alis'])} TL\nSatış: {str(ceyrek['satis'])} TL\nDeğişim: {str(ceyrek['degisim'])}\n\n'''
+            f'''Çeyrek Altın\n--------------\nAlış: {str(ceyrek['Alış'])} TL\nSatış: {str(ceyrek['Satış'])} TL\nDeğişim: {str(ceyrek['Değişim'])}\n\n'''
         )
         print(
-            f'''Gram Altın\n--------------\nAlış: {str(gram['alis'])} TL\nSatış: {str(gram['satis'])} TL\nDeğişim: {str(gram['degisim'])}\n'''
+            f'''Gram Altın\n--------------\nAlış: {str(gram['Alış'])} TL\nSatış: {str(gram['Satış'])} TL\nDeğişim: {str(gram['Değişim'])}\n'''
         )
     except:
         pass
