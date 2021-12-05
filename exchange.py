@@ -18,27 +18,27 @@ data = get()
 
 
 usd = {
-    'Alış': get()['USD']['Alış'],
-    'Satış': get()['USD']['Satış'],
-    'Değişim': get()['USD']['Değişim']
+    'Alış': data['USD']['Alış'],
+    'Satış': data['USD']['Satış'],
+    'Değişim': data['USD']['Değişim']
 }
 
 eur = {
-    'Alış': get()['EUR']['Alış'],
-    'Satış': get()['EUR']['Satış'],
-    'Değişim': get()['EUR']['Değişim']
+    'Alış': data['EUR']['Alış'],
+    'Satış': data['EUR']['Satış'],
+    'Değişim': data['EUR']['Değişim']
 }
 
 gram = {
-    'Alış': get()['gram-altin']['Alış'],
-    'Satış': get()['gram-altin']['Satış'],
-    'Değişim': get()['gram-altin']['Değişim']
+    'Alış': data['gram-altin']['Alış'],
+    'Satış': data['gram-altin']['Satış'],
+    'Değişim': data['gram-altin']['Değişim']
 }
 
 ceyrek = {
-    'Alış': get()['ceyrek-altin']['Alış'],
-    'Satış': get()['ceyrek-altin']['Satış'],
-    'Değişim': get()['ceyrek-altin']['Değişim']
+    'Alış': data['ceyrek-altin']['Alış'],
+    'Satış': data['ceyrek-altin']['Satış'],
+    'Değişim': data['ceyrek-altin']['Değişim']
 }
 
 
@@ -46,7 +46,7 @@ def show():
     try:
         print()
         print("Döviz (TRY)".center(50, '*'))
-        print(get()['Update_Date'].center(50, ' '))
+        print(data['Update_Date'].center(50, ' '))
         print(
             f'''Dolar\n--------------\nAlış: {str(usd['Alış'])} TL\nSatış: {str(usd['Satış'])} TL\nDeğişim: {str(usd['Değişim'])}\n\n'''
         )
